@@ -1,0 +1,23 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Short your url's using this app created with NodeJS and Express for a freecodecamp challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "url",
+    "url-shortener",
+    "freecodecamp",
+    "nodejs",
+    "express"
+  ],
+  "author": "Jose Luis Fernandez Mateo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongo-db": "^1.0.2"
+  }
+}
