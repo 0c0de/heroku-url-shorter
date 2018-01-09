@@ -1,5 +1,5 @@
 const express = require('express');
-const database = require('mongodb').MongoClient();
+const database = require('mongodb').MongoClient;
 
 let app = express();
 let port = process.env.PORT || 3000;
@@ -13,10 +13,6 @@ app.get("/new/:url(*)", (Request, Response) => {
     const databaseURI = process.env.MONGOLAB_URI;
     console.log(databaseURI);
     database.connect(databaseURI, function(err, db) {
-        if(err){
-            console.log("Error connecting to database: ",databaseURI +" ", err);
-        }
-
         if(db){
             console.log("Succesful connection to database: ", databaseURI +" ",db);
         }
