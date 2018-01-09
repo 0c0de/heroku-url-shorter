@@ -1,9 +1,8 @@
 const express = require('express');
-const database = require('mongoose');
+const database = require('mongodb').MongoClient();
 
 let app = express();
 let port = process.env.PORT || 3000;
-let databaseURI = process.env.MONGOLAB_URI || process.env.MONGOHR_URL || 'mongodb://localhost/test';
 
 app.get("/", (Request, Response) =>{
     Response.send("Hey this is a hello world text");
@@ -11,7 +10,9 @@ app.get("/", (Request, Response) =>{
 
 app.get("/new/:url(*)", (Request, Response) => {
     var uri = encodeURI(Request.params.url);
-    database.connect(databaseURI, (err, db) => {
+    const databaseURI = process.env.MONGOLAB_URI;
+    console.log(databaseURI);
+    database.connect(databaseURI, function(err, db) {
         if(err){
             console.log("Error connecting to database: ",databaseURI +" ", err);
         }
