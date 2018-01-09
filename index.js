@@ -5,7 +5,7 @@ let app = express();
 let port = process.env.PORT || 3000;
 
 app.get("/", (Request, Response) =>{
-    Response.send("Hey this is a hello world text");
+    Response.sendFile(__dirname+'/index.html');
 });
 
 app.get("/new/:url(*)", (Request, Response) => {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Url Shorten Service by Jose Luis Fernandez Mateo</title>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="main-holder">
+        <div class="front-end">
+            <div class="blurred-back"></div>
+            <div class="form-url">
+                <center><h1>Short your URLs</h1></center>
+                    <div id="sendUrl">
+                        <center>
+                            <input type="text" id="url-text" placeholder="Enter your link ;)" />
+                            <button type="button" class="send" onclick=sendURL()>Convert</button>
+                        </center>
+                    </div>
+            </div>
+        </div>
+        <div id="particles-js"></div>
+    </div>
+    <script>
+        particlesJS.load('particles-js', 'part.json', () => {
+            console.log('callback - particles.js config loaded');
+        });
+
+        function sendURL(){
+            var url = document.getElementById("url-text").value;
+            window.location.href=window.location+"new/"+encodeURI(url);
+        }
+    </script>
+</body>
+</html>
