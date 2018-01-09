@@ -24,6 +24,9 @@ app.get("/new/:url(*)", (Request, Response) => {
                 ORIGINAL_URI: uri,
             };
             console.log(finalURI);
+            db.collection("urls").insert(finalURI, (result) => {
+                console.log(result);
+            });
         }
     });
     Response.send(uri);
@@ -33,7 +36,7 @@ app.get("/new/:url(*)", (Request, Response) => {
 function generateNewURL(uri){
     let dictionary = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     dictionary = dictionary.split("");
-    var finalURL = shuffleArr(dictionary);
+    var finalURL = shuffleArr(dictionary).join("");
     return finalURL;
 }
 
