@@ -39,9 +39,10 @@ function generateNewURL(uri){
 
 function shuffleArr(arr){
     let shufledArr = [];
-    var i = 6, j, temp;
-    if ( i === 0 ) return false;
-    while ( --i ) {
+    var length = 6;
+    var i = this.length, j, temp;
+    if ( length === 0 ) return false;
+    while ( length-- ) {
        j = Math.floor( Math.random() * ( i + 1 ) );
        temp = arr[i];
        arr[i] = arr[j]; 
