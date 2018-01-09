@@ -20,7 +20,7 @@ app.get("/new/:url(*)", (Request, Response) => {
         if(db){
             console.log("Succesful connection to database");
             let finalURI = {
-                GENERATED_URI: generateNewURL(uri),
+                GENERATED_URI: Request.host + "/" + generateNewURL(uri),
                 ORIGINAL_URI: uri,
             };
             console.log(finalURI);
