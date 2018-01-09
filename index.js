@@ -13,13 +13,43 @@ app.get("/new/:url(*)", (Request, Response) => {
     const databaseURI = process.env.MONGOLAB_URI;
     console.log(databaseURI);
     database.connect(databaseURI, function(err, db) {
+        if(err){
+            console.log("Oops some error occurred while connecting to database: " + err);
+        }
+
         if(db){
-            console.log("Succesful connection to database: ", databaseURI +" ",db);
+            console.log("Succesful connection to database");
+            let finalURI = {
+                GENERATED_URI: generateNewURL(uri),
+                ORIGINAL_URI: uri,
+            };
+            console.log(finalURI);
         }
     });
     Response.send(uri);
     
 });
+
+function generateNewURL(uri){
+    let dictionary = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    dictionary = dictionary.split("");
+    var finalURL = shuffleArr(dictionary);
+    return finalURL;
+}
+
+function shuffleArr(arr){
+    let shufledArr = [];
+    var i = 6, j, temp;
+    if ( i === 0 ) return false;
+    while ( --i ) {
+       j = Math.floor( Math.random() * ( i + 1 ) );
+       temp = arr[i];
+       arr[i] = arr[j]; 
+       arr[j] = temp;
+       shufledArr.push(temp);
+    }
+    return shufledArr;
+}
 
 app.listen(port, (callback) =>{
     console.log("Detecting a new engineer in port: " + port);
