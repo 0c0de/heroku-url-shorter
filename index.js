@@ -24,9 +24,13 @@ app.get("/new/:url(*)", (Request, Response) => {
                 ORIGINAL_URI: uri,
             };
             console.log(finalURI);
-            db.collection("urls").insert(finalURI, (result) => {
-                console.log(result);
+            db.collection("urls").insert(finalURI, (err, data) => {
+                if(err){
+                    throw err;
+                }
+                console.log("Object inserted correctly");
             });
+            db.close();
         }
     });
     Response.send(uri);
