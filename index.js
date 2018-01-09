@@ -41,7 +41,7 @@ function shuffleArr(arr){
     let shufledArr = [];
     var length = 6;
     var i = arr.length, j, temp;
-    if ( length === 0 ) return false;
+    if ( length === -1 ) return false;
     while ( length-- ) {
        j = Math.floor( Math.random() * ( i + 1 ) );
        temp = arr[i];
