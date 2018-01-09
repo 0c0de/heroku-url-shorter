@@ -24,7 +24,7 @@ app.get("/new/:url(*)", (Request, Response) => {
                 ORIGINAL_URI: uri,
             };
             console.log(finalURI);
-            db.collection("urls").insertOne(finalURI, (err, data) => {
+            db.collection("urls").insertOne(finalURI, function(err, data){
                 if(err)
                     throw err;
                 
