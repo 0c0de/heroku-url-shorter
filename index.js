@@ -60,7 +60,7 @@ app.post("/new/:url(*)", (Request, Response) => {
     
 });
 
-app.get("/:codedURL", (Request, Response) =>{
+app.get("/:codeURL", (Request, Response) =>{
     let urlForSearch = {
         url: Request.hostname + encodeURI(Request.params.codeURL),
     };
