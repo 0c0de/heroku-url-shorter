@@ -22,7 +22,7 @@ app.post("/new/:url(*)", (Request, Response) => {
             if(db){
                 console.log("Succesful connection to database");
                 let finalURI = {
-                    GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
+                    GENERATED_URI: generateNewURL(Request.params.url),
                     ORIGINAL_URI: Request.params.url,
                 };
                 db.collection("urls").insertOne(finalURI, (err, data) =>{
@@ -44,7 +44,7 @@ app.post("/new/:url(*)", (Request, Response) => {
 
 app.get("/:codeURL", (Request, Response) =>{
     let urlForSearch = {
-        url: Request.hostname + "/" + encodeURI(Request.params.codeURL),
+        GENERATED_URI: encodeURI(Request.params.codeURL),
     };
     console.log(urlForSearch);
     database.connect(databaseURI, (err, db) => {
