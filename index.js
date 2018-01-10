@@ -25,32 +25,14 @@ app.post("/new/:url(*)", (Request, Response) => {
                     GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
                     ORIGINAL_URI: Request.params.url,
                 };
-                db.collection("urls").findOne(finalURI,(err, res) =>{
-                    if(res == null){
-                        db.collection("urls").insertOne(finalURI, (err, data) =>{
-                            if(err)
-                                throw err;
+                db.collection("urls").insertOne(finalURI, (err, data) =>{
+                    if(err)
+                        throw err;
                             
-                            console.log("Object inserted correctly");
-                            Response.send(finalURI);
-                        });
-                    }else{
-                        finalURI = {
-                            GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
-                            ORIGINAL_URI: Request.params.url,
-                        };
-
-                        db.collection("urls").insertOne(finalURI, (err, data) =>{
-                            if(err)
-                                throw err;
-                            
-                            console.log("Object inserted correctly");
-                            Response.send(finalURI);
-                        });
-                    }
-                });
+                        console.log("Object inserted correctly");
+                        Response.send(finalURI);
+                    });
                 console.log(finalURI);
-               
                 db.close();
             }
         });
