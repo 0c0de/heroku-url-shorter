@@ -72,3 +72,24 @@ p{
     font-size: 14px;
     padding-left: 1.8rem;
 }
+
+nav ul{
+    list-style: none;
+}
+
+nav ul li{
+    display: inline-block;
+    padding: 1rem 2rem;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.medium{
+    font-size: 2rem;
+}
