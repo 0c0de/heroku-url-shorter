@@ -22,11 +22,11 @@ html{
 .blurred-back{
     width: 100%;
     height: 100%;
-    padding: 6% 8%;
+    padding: 13% 8%;
     background-color: rgb(97, 97, 97);
     opacity: 1;
     background: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-602625.jpg');
-    background-position-y: -23%;
+    background-position-y: -68%;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -60,4 +60,15 @@ input[type=text]{
     background-color: #2C82C9;
     border: 2px solid #2C82C9;
 
+}
+
+em{
+    font-family: 'Console', monospace;
+    color: red;
+    padding: 0 0.5rem;
+}
+
+p{
+    font-size: 14px;
+    padding-left: 1.8rem;
 }

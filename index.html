@@ -23,28 +23,29 @@
                         </center>
                     </div>
             </div>
+            <p style="position: absolute; top: 12rem;">You can use our API with just an AJAX request or do it manually:<br />
+                The endpoint is this <em>http://intense-beyond-33447.herokuapp.com/new/https://example.com</em> just change example.com for another page such as facebook.com or google.com and thats it<br/>
+                As an answer you will get the codfied url in JSON format for example <em>{URI:http://intense-beyond-33447.herokuapp.com/zfu0Xp}</em></p>
         </div>
         <div id="particles-js"></div>
     </div>
     <script>
         particlesJS.load('particles-js', 'part.json', () => {
-            console.log('callback - particles.js config loaded');
+            console.log('Particle JS loaded correctly');
         });
 
         function sendURL(){
             var url = document.getElementById("url-text");
             $.post("/new/"+encodeURI(url.value), (success) => {
                 console.log(success);
-            })  .done(function(data) {
+            }).done(function(data) {
                     console.log(data);
                     url.value = window.location + data.GENERATED_URI;
-                })
-                .fail(function(err) {
+            }).fail(function(err) {
                     console.log("/new/"+encodeURI(url),err);
-                })
-                .always(function() {
-                    alert( "finished" );
-                });
+            }).always(function() {
+                    console.log("AJAX finished");
+            });
         }
     </script>
 </body>

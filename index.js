@@ -21,23 +21,20 @@ app.post("/new/:url(*)", (Request, Response) => {
 
             if(db){
                 console.log("Succesful connection to database");
+                let urlGenerated = generateNewURL(Request.params.url);
                 let finalURI = {
-                    GENERATED_URI: generateNewURL(Request.params.url),
+                    GENERATED_URI: urlGenerated,
                     ORIGINAL_URI: Request.params.url,
                 };
                 db.collection("urls").insertOne(finalURI, (err, data) =>{
-                    if(err)
-                        throw err;
-                            
-                        console.log("Object inserted correctly");
-                        Response.send(finalURI);
-                    });
-                console.log(finalURI);
+                    if(err) throw err;
+                    Response.send({URI:Request.hostname + finalURI.GENERATED_URI});
+                });
                 db.close();
             }
         });
     }else{
-        Response.send("Send some data  before");
+        Response.send("Hey a hint here, you should pass data in order to do something");
     }
     
 });
@@ -49,7 +46,7 @@ app.get("/:codeURL", (Request, Response) =>{
     console.log(urlForSearch);
     database.connect(databaseURI, (err, db) => {
         if(err){
-            console.log("Some error has occurred, ", err);
+            alert("Ups some error occurred connecting to database you should refresh the page ;)");
         }
 
         db.collection("urls").findOne(urlForSearch, (err, resources) => {
