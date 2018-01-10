@@ -4,6 +4,8 @@ const database = require('mongodb').MongoClient;
 let app = express();
 let port = process.env.PORT || 3000;
 
+app.use(express.static('public'));
+
 app.get("/", (Request, Response) =>{
     Response.sendFile(__dirname+'/index.html');
 });
