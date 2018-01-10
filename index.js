@@ -26,7 +26,7 @@ app.post("/new/:url(*)", (Request, Response) => {
                     ORIGINAL_URI: Request.params.url,
                 };
                 db.collection("urls").findOne(finalURI, function(err, db){
-                    console.log(db.name)
+                    console.log(db);
                 });
                 console.log(finalURI);
                 db.collection("urls").insertOne(finalURI, function(err, data){
