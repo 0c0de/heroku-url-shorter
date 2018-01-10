@@ -3,6 +3,7 @@ const database = require('mongodb').MongoClient;
 
 let app = express();
 let port = process.env.PORT || 3000;
+const databaseURI = process.env.MONGOLAB_URI;
 
 app.use(express.static('public'));
 
@@ -12,9 +13,8 @@ app.get("/", (Request, Response) =>{
 
 app.post("/new/:url(*)", (Request, Response) => {
     if(Request.params.url != undefined){
-        const databaseURI = process.env.MONGOLAB_URI;
         console.log(databaseURI);
-        database.connect(databaseURI, function(err, db) {
+        database.connect(databaseURI, (err, db) => {
             if(err){
                 console.log("Oops some error occurred while connecting to database: " + err);
             }
@@ -25,17 +25,32 @@ app.post("/new/:url(*)", (Request, Response) => {
                     GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
                     ORIGINAL_URI: Request.params.url,
                 };
-                db.collection("urls").findOne(finalURI, function(err, db){
-                    console.log(db);
+                db.collection("urls").findOne(finalURI,(err, db) =>{
+                    if(db == null){
+                        db.collection("urls").insertOne(finalURI, (err, data) =>{
+                            if(err)
+                                throw err;
+                            
+                            console.log("Object inserted correctly");
+                            Response.send(finalURI);
+                        });
+                    }else{
+                        finalURI = {
+                            GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
+                            ORIGINAL_URI: Request.params.url,
+                        };
+
+                        db.collection("urls").insertOne(finalURI, (err, data) =>{
+                            if(err)
+                                throw err;
+                            
+                            console.log("Object inserted correctly");
+                            Response.send(finalURI);
+                        });
+                    }
                 });
                 console.log(finalURI);
-                db.collection("urls").insertOne(finalURI, function(err, data){
-                    if(err)
-                        throw err;
-                    
-                    console.log("Object inserted correctly");
-                    Response.send(finalURI);
-                });
+               
                 db.close();
             }
         });
@@ -43,6 +58,21 @@ app.post("/new/:url(*)", (Request, Response) => {
         Response.send("Send some data  before");
     }
     
+});
+
+app.get("/:codedURL", (Request, Response) =>{
+    let urlForSearch = {
+        url: window.location + encodeURI(Request.params.codeURL),
+    };
+    database.connect(databaseURI, (err, db) => {
+        if(err){
+            console.log("Some error has occurred, ", err);
+        }
+
+        db.collection("urls").findOne(urlForSearch, (err, resources) => {
+            window.location.href = resources.ORIGINAL_URI;
+        });
+    })
 });
 
 function generateNewURL(uri){
