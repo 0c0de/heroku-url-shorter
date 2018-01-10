@@ -26,10 +26,11 @@ html{
     background-color: rgb(97, 97, 97);
     opacity: 1;
     background: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-602625.jpg');
+    background-position-y: -23%;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
-    filter: blur(18px);
+    filter: blur(13px);
 }
 
 .form-url{

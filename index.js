@@ -10,8 +10,7 @@ app.get("/", (Request, Response) =>{
     Response.sendFile(__dirname+'/index.html');
 });
 
-app.post("/new", (Request, Response) => {
-    var uri = Request.body.uri;
+app.post("/new/:url(*)", (Request, Response) => {
     if(uri != undefined){
         const databaseURI = process.env.MONGOLAB_URI;
         console.log(databaseURI);
@@ -32,12 +31,11 @@ app.post("/new", (Request, Response) => {
                         throw err;
                     
                     console.log("Object inserted correctly");
+                    Response.send(finalURI);
                 });
                 db.close();
             }
         });
-
-            Response.send(uri);
     }else{
         Response.send("Send some data  before");
     }

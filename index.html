@@ -33,20 +33,17 @@
 
         function sendURL(){
             var url = document.getElementById("url-text").value;
-            var uri = window.location+"new/"+encodeURI(url);
-            console.log(uri);
-            $.ajax({
-                url: '/new',
-                data: {uri: encodeURI(url)},
-                dataType: 'JSON',
-                method: 'POST',
-                success: function(data){
-                    console.log("All went ok: ", data);
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            })
+            $.post("/new/"+encodeURI(url), (success) => {
+                console.log(success);
+            })  .done(function() {
+                    alert( "second success" );
+                })
+                .fail(function(err) {
+                    console.log("/new/"+encodeURI(url),err);
+                })
+                .always(function() {
+                    alert( "finished" );
+                });
         }
     </script>
 </body>
