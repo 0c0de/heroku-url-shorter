@@ -37,7 +37,7 @@
                 console.log(success);
             })  .done(function(data) {
                     console.log(data);
-                    url.value = window.location + "/" + data.GENERATED_URI;
+                    url.value = window.location + data.GENERATED_URI;
                 })
                 .fail(function(err) {
                     console.log("/new/"+encodeURI(url),err);

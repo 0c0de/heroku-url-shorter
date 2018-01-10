@@ -53,6 +53,8 @@ app.get("/:codeURL", (Request, Response) =>{
         }
 
         db.collection("urls").findOne(urlForSearch, (err, resources) => {
+            if(err) throw err;
+            console.log("Founded ;) " + resources);
             Response.location(resources.ORIGINAL_URI);
         });
     });
