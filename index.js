@@ -10,8 +10,8 @@ app.get("/", (Request, Response) =>{
     Response.sendFile(__dirname+'/index.html');
 });
 
-app.post("/new/:url(*)", (Request, Response) => {
-    var uri = encodeURI(Request.params.url);
+app.post("/new/", (Request, Response) => {
+    var uri = Request.body.uri;
     const databaseURI = process.env.MONGOLAB_URI;
     console.log(databaseURI);
     database.connect(databaseURI, function(err, db) {
