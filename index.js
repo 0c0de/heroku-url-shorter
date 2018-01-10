@@ -56,7 +56,7 @@ app.get("/:codeURL", (Request, Response) =>{
             if(err) throw err;
             console.log("Founded ;) ", resources);
             if(resources != null){
-                Response.redirect(resources.ORIGINAL_URI);
+                Response.redirect(encodeURI(resources.ORIGINAL_URI));
             }else{
                 Response.redirect("/");
             }
