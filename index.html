@@ -32,11 +32,12 @@
         });
 
         function sendURL(){
-            var url = document.getElementById("url-text").value;
-            $.post("/new/"+encodeURI(url), (success) => {
+            var url = document.getElementById("url-text");
+            $.post("/new/"+encodeURI(url.value), (success) => {
                 console.log(success);
-            })  .done(function() {
-                    alert( "second success" );
+            })  .done(function(data) {
+                    console.log(data);
+                    url.value = data.GENERATED_URI;
                 })
                 .fail(function(err) {
                     console.log("/new/"+encodeURI(url),err);
