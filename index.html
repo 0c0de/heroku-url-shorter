@@ -36,7 +36,7 @@
             var uri = window.location+"new/"+encodeURI(url);
             console.log(uri);
             $.ajax({
-                url: '/new/',
+                url: '/new',
                 data: {uri: encodeURI(url)},
                 dataType: 'JSON',
                 method: 'POST',

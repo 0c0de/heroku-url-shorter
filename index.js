@@ -10,33 +10,34 @@ app.get("/", (Request, Response) =>{
     Response.sendFile(__dirname+'/index.html');
 });
 
-app.post("/new/", (Request, Response) => {
+app.post("/new", (Request, Response) => {
     var uri = Request.body.uri;
-    const databaseURI = process.env.MONGOLAB_URI;
-    console.log(databaseURI);
-    database.connect(databaseURI, function(err, db) {
-        if(err){
-            console.log("Oops some error occurred while connecting to database: " + err);
-        }
-
-        if(db){
-            console.log("Succesful connection to database");
-            let finalURI = {
-                GENERATED_URI: Request.host + "/" + generateNewURL(uri),
-                ORIGINAL_URI: uri,
-            };
-            console.log(finalURI);
-            db.collection("urls").insertOne(finalURI, function(err, data){
-                if(err)
-                    throw err;
-                
-                console.log("Object inserted correctly");
-            });
-            db.close();
-        }
-    });
     if(uri != undefined){
-        Response.send(uri);
+        const databaseURI = process.env.MONGOLAB_URI;
+        console.log(databaseURI);
+        database.connect(databaseURI, function(err, db) {
+            if(err){
+                console.log("Oops some error occurred while connecting to database: " + err);
+            }
+
+            if(db){
+                console.log("Succesful connection to database");
+                let finalURI = {
+                    GENERATED_URI: Request.host + "/" + generateNewURL(uri),
+                    ORIGINAL_URI: uri,
+                };
+                console.log(finalURI);
+                db.collection("urls").insertOne(finalURI, function(err, data){
+                    if(err)
+                        throw err;
+                    
+                    console.log("Object inserted correctly");
+                });
+                db.close();
+            }
+        });
+
+            Response.send(uri);
     }else{
         Response.send("Send some data  before");
     }
