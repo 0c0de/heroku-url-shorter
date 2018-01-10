@@ -17,6 +17,7 @@ html{
     background-image: url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-602625.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .blurred-back{
