@@ -28,7 +28,7 @@ app.post("/new/:url(*)", (Request, Response) => {
                 };
                 db.collection("urls").insertOne(finalURI, (err, data) =>{
                     if(err) throw err;
-                    Response.send({URI:Request.hostname + finalURI.GENERATED_URI});
+                    Response.send({URI:Request.hostname + "/" + finalURI.GENERATED_URI});
                 });
                 db.close();
             }

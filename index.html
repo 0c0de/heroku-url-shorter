@@ -23,7 +23,7 @@
                         </center>
                     </div>
             </div>
-            <p style="position: absolute; top: 12rem;">You can use our API with just an AJAX request or do it manually:<br />
+            <p style="position: absolute; top: 14rem;">You can use our API with just an AJAX request or do it manually:<br />
                 The endpoint is this <em>http://intense-beyond-33447.herokuapp.com/new/https://example.com</em> just change example.com for another page such as facebook.com or google.com and thats it<br/>
                 As an answer you will get the codfied url in JSON format for example <em>{URI:http://intense-beyond-33447.herokuapp.com/zfu0Xp}</em></p>
         </div>
@@ -40,7 +40,7 @@
                 console.log(success);
             }).done(function(data) {
                     console.log(data);
-                    url.value = window.location + data.GENERATED_URI;
+                    url.value = data.URI;
             }).fail(function(err) {
                     console.log("/new/"+encodeURI(url),err);
             }).always(function() {
