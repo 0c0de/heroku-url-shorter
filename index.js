@@ -55,7 +55,7 @@ app.get("/:codeURL", (Request, Response) =>{
         db.collection("urls").findOne(urlForSearch, (err, resources) => {
             if(err) throw err;
             console.log("Founded ;) ", resources);
-            if(resources.ORIGINAL_URI != null || resources.ORIGINAL_URI != undefined || resources.ORIGINAL_URI != ''){
+            if(resources != null){
                 Response.redirect(resources.ORIGINAL_URI);
             }else{
                 Response.redirect("/");
