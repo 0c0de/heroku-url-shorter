@@ -62,7 +62,7 @@ app.post("/new/:url(*)", (Request, Response) => {
 
 app.get("/:codedURL", (Request, Response) =>{
     let urlForSearch = {
-        url: window.location + encodeURI(Request.params.codeURL),
+        url: Request.host + encodeURI(Request.params.codeURL),
     };
     database.connect(databaseURI, (err, db) => {
         if(err){
