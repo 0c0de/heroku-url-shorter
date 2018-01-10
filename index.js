@@ -35,7 +35,11 @@ app.post("/new/", (Request, Response) => {
             db.close();
         }
     });
-    Response.send(uri);
+    if(uri != undefined){
+        Response.send(uri);
+    }else{
+        Response.send("Send some data  before");
+    }
     
 });
 
