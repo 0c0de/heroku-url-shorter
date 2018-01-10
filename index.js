@@ -70,9 +70,9 @@ app.get("/:codedURL", (Request, Response) =>{
         }
 
         db.collection("urls").findOne(urlForSearch, (err, resources) => {
-            window.location.href = resources.ORIGINAL_URI;
+            Response.send('<script>window.location.href = resources.ORIGINAL_URI;<script>');
         });
-    })
+    });
 });
 
 function generateNewURL(uri){
