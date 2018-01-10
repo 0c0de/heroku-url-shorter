@@ -33,8 +33,10 @@
 
         function sendURL(){
             var url = document.getElementById("url-text").value;
+            var uri = window.location+"new/"+encodeURI(url);
+            console.log(uri);
             $.ajax({
-                url: window.location+"new/"+encodeURI(url),
+                url: uri,
                 dataType: 'JSON',
                 method: 'POST',
                 success: function(data){
