@@ -62,8 +62,9 @@ app.post("/new/:url(*)", (Request, Response) => {
 
 app.get("/:codedURL", (Request, Response) =>{
     let urlForSearch = {
-        url: Request.host + encodeURI(Request.params.codeURL),
+        url: Request.hostname + encodeURI(Request.params.codeURL),
     };
+    console.log(urlForSearch);
     database.connect(databaseURI, (err, db) => {
         if(err){
             console.log("Some error has occurred, ", err);
