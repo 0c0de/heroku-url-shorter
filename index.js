@@ -58,7 +58,7 @@ app.get("/:codeURL", (Request, Response) =>{
             if(resources.ORIGINAL_URI != null || resources.ORIGINAL_URI != undefined || resources.ORIGINAL_URI != ''){
                 Response.redirect(resources.ORIGINAL_URI);
             }else{
-                Response.redirect(Request.hostname);
+                Response.redirect("/");
             }
         });
     });
