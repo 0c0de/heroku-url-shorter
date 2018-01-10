@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Url Shorten Service by Jose Luis Fernandez Mateo</title>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet" />
 </head>
 <body>
@@ -32,7 +33,17 @@
 
         function sendURL(){
             var url = document.getElementById("url-text").value;
-            window.location.href=window.location+"new/"+encodeURI(url);
+            $.ajax({
+                url: window.location+"new/"+encodeURI(url),
+                dataType: 'JSON',
+                method: 'POST',
+                success: function(data){
+                    console.log("All went ok: ", data);
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
         }
     </script>
 </body>
