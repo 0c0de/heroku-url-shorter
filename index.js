@@ -11,7 +11,7 @@ app.get("/", (Request, Response) =>{
 });
 
 app.post("/new/:url(*)", (Request, Response) => {
-    if(uri != undefined){
+    if(Request.params.url != undefined){
         const databaseURI = process.env.MONGOLAB_URI;
         console.log(databaseURI);
         database.connect(databaseURI, function(err, db) {
@@ -22,8 +22,8 @@ app.post("/new/:url(*)", (Request, Response) => {
             if(db){
                 console.log("Succesful connection to database");
                 let finalURI = {
-                    GENERATED_URI: Request.host + "/" + generateNewURL(uri),
-                    ORIGINAL_URI: uri,
+                    GENERATED_URI: Request.host + "/" + generateNewURL(Request.params.url),
+                    ORIGINAL_URI: Request.params.url,
                 };
                 console.log(finalURI);
                 db.collection("urls").insertOne(finalURI, function(err, data){
