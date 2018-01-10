@@ -19,7 +19,7 @@ app.post("/new/:url(*)", (Request, Response) => {
                 console.log("Oops some error occurred while connecting to database: " + err);
             }
 
-            if(db){
+            if(db && Request.params.url.startsWith("https://") || Request.params.url.startsWith("http://")){
                 console.log("Succesful connection to database");
                 let urlGenerated = generateNewURL(Request.params.url);
                 let finalURI = {
@@ -31,6 +31,8 @@ app.post("/new/:url(*)", (Request, Response) => {
                     Response.send({URI:Request.hostname + "/" + finalURI.GENERATED_URI});
                 });
                 db.close();
+            }else{
+                Response.send({error:"Looks like your url not looks valid be sure this includes http:// or https://"})
             }
         });
     }else{
